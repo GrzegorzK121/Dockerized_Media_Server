@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - media_volume:/files
+    environment:
+      - FLASK_ENV=development
+    restart: always
+
+volumes:
+  media_volume:
