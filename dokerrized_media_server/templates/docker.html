@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Dockera</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% include 'menu.html' %}
+    <div class="container">
+        <h1>Kontenery Dockera</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+            {% for container in containers %}
+            <tr>
+                <td>{{ container.short_id }}</td>
+                <td>{{ container.name }}</td>
+                <td>{{ container.status }}</td>
+                <td>
+                    {% if container.status != 'running' %}
+                        <a href="/docker/start/{{ container.id }}">Start</a>
+                    {% else %}
+                        <a href="/docker/stop/{{ container.id }}">Stop</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

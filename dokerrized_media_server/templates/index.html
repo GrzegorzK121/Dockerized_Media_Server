@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przeglądarka Multimediów</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>  <!-- Ładowanie JavaScript -->
+</head>
+<body>
+    {% include 'menu.html' %}  
+    <div class="container">
+        <h1>Przeglądarka Multimediów</h1>
+        {% if user %}
+            <p>Zalogowany jako: <strong>{{ user }}</strong> ({{ role }})</p>
+        {% endif %}
+        <div class="gallery">
+            {% for file in files %}
+                <div class="media-item">
+                    {% if file.endswith('.jpg') or file.endswith('.png') %}
+                        <img src="/files/{{ file }}" alt="{{ file }}">
+                    {% elif file.endswith('.mp4') %}
+                        <video controls>
+                            <source src="/files/{{ file }}" type="video/mp4">
+                        </video>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="sidebar">
+    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+    <nav class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% if user %}
+                {% if role == 'admin' %}
+                    <li><a href="/wykresy">Wykresy</a></li>
+                {% endif %}
+                <li><a href="/upload">Dodaj multimedia</a></li>
+                <li><a href="/logout">Wyloguj</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
